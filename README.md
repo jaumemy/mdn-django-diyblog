@@ -8,4 +8,4 @@ The models for this site are as shown below:
 ![Django Blog Models](./blog/static/images/diy_django_mini_blog_models.png)
 
 
-For more information see the associated [MDN assessment page](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/django_assessment_blog).
+For more information see the associated [MDN assessment page](https://github.com/mdn/django-diy-blog/blob/master/blog/static/images/diy_django_mini_blog_models.png?raw=true).
