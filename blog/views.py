@@ -2,6 +2,11 @@ from django.shortcuts import render
 from blog.models import BlogAuthor, Blog, BlogComment
 from django.views import generic
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView
+from django.urls import reverse
+from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
 
@@ -37,3 +42,22 @@ class BlogAuthorListView(generic.ListView):
 
 class BlogAuthorDetailView(generic.DetailView):
     model = BlogAuthor
+
+
+class BlogCommentCreate(LoginRequiredMixin, CreateView):
+
+    model = BlogComment
+    fields = ['description']
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogCommentCreate, self).get_context_data(**kwargs)
+        context['blog'] = get_object_or_404(Blog, pk=self.kwargs['pk'])
+        return context
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.blog = get_object_or_404(Blog, pk=self.kwargs['pk'])
+        return super(BlogCommentCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('blog-detail', kwargs={'pk': self.kwargs['pk'],})
