@@ -21,12 +21,15 @@ TEMPLATES_DIR = Path.joinpath(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'bbhcn2av18+j@bkh5vmd^thf+qc@&1w9_zo)6+8-k2zniz!+mq'
+# SECRET_KEY = 'bbhcn2av18+j@bkh5vmd^thf+qc@&1w9_zo)6+8-k2zniz!+mq'
+import os
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'bbhcn2av18+j@bkh5vmd^thf+qc@&1w9_zo)6+8-k2zniz!+mq')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mdn-django-diyblog.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -124,3 +127,12 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = BASE_DIR / 'staticfiles'  #. os.path.join(BASE_DIR, 'staticfiles')
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
