@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>DIY Mini Blog</title>{% endblock %}
+
+{% block content %}
+  <br>
+  <br>
+  <h1>Mini Blog Home</h1>
+  <p>Welcome to DIY Mini Blog, a website developed by <em>JMontane</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>The website has the following record counts:</p>
+  <ul>
+    <li><strong>Blogs:</strong> {{ num_blogs }}</li>
+    <li><strong>Comments:</strong> {{ num_comments }}</li>
+    <li><strong>Authors:</strong> {{ num_authors }}</li>
+  </ul>
+  <br>
+{% endblock %}
